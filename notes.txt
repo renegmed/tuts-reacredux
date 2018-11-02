@@ -17,3 +17,7 @@ $ node src/counter.js
 
 
 
+Store 
+
+$ npm install --save redux
+
