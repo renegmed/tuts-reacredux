@@ -1,4 +1,11 @@
-import { createStore} from 'redux';
-import { reducer } from './ducks/freezer';
+import { createStore, combineReducers} from 'redux';
+import { reducer as freezer} from './ducks/freezer';
 
-export default createStore(reducer);
+
+// adding a dummy reducer foo
+const rootReducer = combineReducers({
+    freezer,
+    foo: (state = {hello: 'world'}, action) => state,
+});
+
+export default createStore(rootReducer);
