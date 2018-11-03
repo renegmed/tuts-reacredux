@@ -7,5 +7,7 @@ store.dispatch(actions.updateTemperature(-8));
  
 store.dispatch(actions.addProductToFreezer(FLAVORS.VANILLA, 15));
 
-store.dispatch(actions.doSomething());
+store.dispatch(actions.doSomething());  // dispatch thunk action
+
+
  
