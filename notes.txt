@@ -21,3 +21,14 @@ Store
 
 $ npm install --save redux
 
+
+Enhancing the store 
+
+Redux Thunk (Middleware)  github.com/gaearon/redux-Thunk
+
+    Delay dispatching of Actions
+    Dispatch multiple Actions
+    Async API calls
+
+$ npm install --save redux-thunk
+
