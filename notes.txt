@@ -32,3 +32,8 @@ Redux Thunk (Middleware)  github.com/gaearon/redux-Thunk
 
 $ npm install --save redux-thunk
 
+
+Redux DevTools
+
+$ npm install --save-dev redux-devtools-extension
+
