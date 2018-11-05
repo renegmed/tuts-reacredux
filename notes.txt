@@ -37,3 +37,7 @@ Redux DevTools
 
 $ npm install --save-dev redux-devtools-extension
 
+
+Fetch Data 
+
+$ npm install axios
