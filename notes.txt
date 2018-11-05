@@ -41,3 +41,8 @@ $ npm install --save-dev redux-devtools-extension
 Fetch Data 
 
 $ npm install axios
+
+Testing
+
+$ npm i axios-mock-adapter
+
