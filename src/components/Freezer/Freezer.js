@@ -9,6 +9,13 @@ class Freezer extends Component {
     flavors: store.getState().freezer.flavors,
   };
 
+  componentDidMount() {
+    store.subscribe(() => {
+      this.setState({
+        flavors: store.getState().freezer.flavors,
+      });
+    });
+  }
   render() {
     const flavors = Object.keys(this.state.flavors).map(flavorName => (
       <FreezerFlavor key={flavorName} flavorName={flavorName} scoops={this.state.flavors[flavorName]} />
