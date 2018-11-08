@@ -1,17 +1,9 @@
-import store from './store'; 
-import { actions } from './ducks/employees';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-store.dispatch(actions.fetchEmployees());
+import App from './components/App/App';
 
-// import * as FLAVORS from './constants/flavors';
-
-// import { actions } from './ducks/freezer';
- 
-// store.dispatch(actions.updateTemperature(-8));
- 
-// store.dispatch(actions.addProductToFreezer(FLAVORS.VANILLA, 15));
-
-// store.dispatch(actions.doSomething());  // dispatch thunk action
-
-
- 
+ReactDOM.render(
+  <App/>,
+  document.getElementById('root')
+);

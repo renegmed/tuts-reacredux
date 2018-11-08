@@ -46,3 +46,10 @@ Testing
 
 $ npm i axios-mock-adapter
 
+
+
+Shop UI
+
+replace folders public and src from author's source code
+
+$ npm i classnames
