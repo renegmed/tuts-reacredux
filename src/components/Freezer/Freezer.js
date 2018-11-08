@@ -10,12 +10,17 @@ class Freezer extends Component {
   };
 
   componentDidMount() {
-    store.subscribe(() => {
+    this.unsubscribe = store.subscribe(() => {
       this.setState({
         flavors: store.getState().freezer.flavors,
       });
     });
   }
+
+  componentWillUnmount() {
+    this.unsubscribe(); // this will cleanly unsubscribe (no error thrown) this component to store if Freezer is un-rendered.
+  }
+
   render() {
     const flavors = Object.keys(this.state.flavors).map(flavorName => (
       <FreezerFlavor key={flavorName} flavorName={flavorName} scoops={this.state.flavors[flavorName]} />

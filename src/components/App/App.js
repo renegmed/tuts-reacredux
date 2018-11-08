@@ -9,13 +9,24 @@ import Colleagues from '../Colleagues/Colleagues';
 import './App.css';
 
 class App extends Component {
+  state = {
+    shouldRenderFreezer: true,
+  }
+
+  componentDidMount() {  // freezer component simulates unmount. See Freezer.js how to unscribe 
+    setTimeout(() => {
+      this.setState({
+        shouldRenderFreezer: false,
+      });
+    }); 
+  }
   render() {
     return (
       <main className="app">
         <img className="logo" src="/logo.svg" alt="Mister Melty's Ice Cream"/>
         <Row>
           <Column>
-            <Freezer />
+            {this.state.shouldRenderFreezer && <Freezer /> }
           </Column>
           <Column>
             <NewOrder />
