@@ -30,13 +30,24 @@ class Freezer extends Component {
     this.unsubscribe(); // this will cleanly unsubscribe (no error thrown) this component to store if Freezer is un-rendered.
   }
 
+  handleClickRestock = (flavorName) => {
+    const amount = parseInt(window.prompt(`Enter amount to restock ${flavorName}`));
+
+    if (!isNaN(amount)) {  // amount is a number
+      store.dispatch(actions.addProductToFreezer(flavorName, amount));
+    }
+  };
+
   render() {
     const flavors = Object.keys(this.state.flavors).map(flavorName => (
-      <FreezerFlavor key={flavorName} flavorName={flavorName} scoops={this.state.flavors[flavorName]} />
+      <FreezerFlavor 
+        key={flavorName}
+        onClickRestock={() => this.handleClickRestock(flavorName)} 
+        flavorName={flavorName} 
+        scoops={this.state.flavors[flavorName]} 
+      />
     ));
-    //console.log(this.state.flavors);
-    //console.log(this.state.temperature);
-
+    
     // used templating technique `` for title
     return (
       <Panel title={`Freezer (°${this.state.temperature || 0}C)`}>
