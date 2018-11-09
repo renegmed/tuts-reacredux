@@ -5,12 +5,56 @@ import { Column, Row } from '../Grid/Grid';
 import ButtonGroup from '../Button/ButtonGroup';
 import Button from '../Button/Button';
 
+import * as FLAVORS from '../../constants/flavors';
+
 import './NewOrder.css';
 
+const DEFAULT_STATE = {
+  scoops: {},
+};
+
 class NewOrder extends Component {
+
+  state = {
+    ...DEFAULT_STATE,
+  };
+
   handleFormSubmit(e) {
     e.preventDefault();
   }
+
+  handleDecreaseFlavor = (flavorName) => {
+    if (!this.state.scoops[flavorName]) {
+      return;
+    }
+
+    if (this.state.scoops[flavorName] === 1) {
+      const updatedScoops = {
+        ...this.state.scoops,
+      };
+      delete updatedScoops[flavorName];
+
+      this.setState({
+        scoops: updatedScoops,
+      });      
+    } else {
+      this.setState({
+        scoops: {
+          ...this.state.scoops,
+          [flavorName]: this.state.scoops[flavorName] - 1,
+        },
+      });
+    }
+  };
+
+  handleIncreaseFlavor = (flavorName) => {
+    this.setState({
+      scoops: {
+        ...this.state.scoops,
+        [flavorName]: (this.state.scoops[flavorName] || 0) + 1,
+      },
+    });
+  };
 
   render() {
     return (
@@ -37,18 +81,20 @@ class NewOrder extends Component {
               <col width="20%"/>
             </colgroup>
             <tbody>
-            <tr>
+            {Object.keys(FLAVORS).map(flavor => (
+              <tr key={flavor}>
               <td>
-                <strong>Vanilla</strong>
+                <strong>{flavor}</strong>
               </td>
               <td>
                 <ButtonGroup>
-                  <Button size="small" label="-" priority="primary" />
-                  <Button size="small" label={5} priority="secondary" />
-                  <Button size="small" label="+" priority="primary" />
+                  <Button size="small" label="-" priority="primary" onClick={() => this.handleDecreaseFlavor(flavor)} />
+                  <Button size="small" label={this.state.scoops[flavor] || 0} priority="secondary" />
+                  <Button size="small" label="+" priority="primary" onClick={() => this.handleIncreaseFlavor(flavor)} />
                 </ButtonGroup>
               </td>
             </tr>
+            ))}
             </tbody>
           </table>
 
