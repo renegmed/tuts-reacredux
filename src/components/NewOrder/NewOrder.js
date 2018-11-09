@@ -10,7 +10,9 @@ import * as FLAVORS from '../../constants/flavors';
 import './NewOrder.css';
 
 const DEFAULT_STATE = {
+  customerName: '',
   scoops: {},
+  cone: false,
 };
 
 class NewOrder extends Component {
@@ -19,11 +21,17 @@ class NewOrder extends Component {
     ...DEFAULT_STATE,
   };
 
-  handleFormSubmit(e) {
+  handleFormSubmit = (e) => {
     e.preventDefault();
-  }
+    console.log('[handleFormSubmit] Order data:', this.state);
+    this.props.placeOrder(this.state); // calls order action ducks/orders/actions
+    this.setState(DEFAULT_STATE);   // reset after order is processed
+  };
 
   handleDecreaseFlavor = (flavorName) => {
+
+    console.log('[handleDecreaseFlavor] flavorName', flavorName);
+
     if (!this.state.scoops[flavorName]) {
       return;
     }
@@ -48,6 +56,7 @@ class NewOrder extends Component {
   };
 
   handleIncreaseFlavor = (flavorName) => {
+    console.log('[handleIncreaseFlavor] flavorName', flavorName);
     this.setState({
       scoops: {
         ...this.state.scoops,
@@ -63,13 +72,27 @@ class NewOrder extends Component {
           <Row>
             <Column>
               <label htmlFor="customer-name">Customer name</label>
-              <input type="text" id="customer-name" name="name" defaultValue="John Doe" />
+              <input 
+                type="text" 
+                id="customer-name" 
+                name="name" 
+                value={this.state.customerName} 
+                onChange={e => this.setState({ customerName: e.target.value })}
+              />
             </Column>
             <Column>
               <label>Container</label>
               <ButtonGroup>
-                <Button label="Cup" priority="primary" />
-                <Button label="Cone" priority="secondary" />
+                <Button 
+                  label="Cup" 
+                  priority={!this.state.cone ? 'primary' : 'secondary'}
+                  onClick={() => this.setState({ cone: false })} 
+                />
+                <Button 
+                  label="Cone" 
+                  priority={this.state.cone ? 'primary' : 'secondary'}
+                  onClick={() => this.setState({ cone: true })} 
+                />
               </ButtonGroup>
             </Column>
           </Row>
@@ -98,7 +121,7 @@ class NewOrder extends Component {
             </tbody>
           </table>
 
-          <Button className="new-order-submit-button" label="Add order"/>
+          <Button className="new-order-submit-button" label="Add order" type="submit"  />
         </form>
       </Panel>
     );

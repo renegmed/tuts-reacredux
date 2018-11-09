@@ -10,13 +10,13 @@ import Freezer from './Freezer';
 class FreezerContainer extends Component {
   
 
-  componentDidMount() { 
-    setInterval(() => {
-      const randomTemperature = -Math.round(Math.random() * 10);
-      this.props.updateTemperature(randomTemperature);
+  // componentDidMount() { 
+  //   setInterval(() => {
+  //     const randomTemperature = -Math.round(Math.random() * 10);
+  //     this.props.updateTemperature(randomTemperature);
 
-    }, 2000);
-  }
+  //   }, 2000);
+  // }
   
   handleClickRestock = (flavorName) => {
     const amount = parseInt(window.prompt(`Enter amount to restock ${flavorName}`));
