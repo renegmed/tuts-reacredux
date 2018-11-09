@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 
 import App from './components/App/App';
 
@@ -13,6 +14,10 @@ setTimeout(function() {
 }, 1500);
 
 ReactDOM.render(
-  <App/>,
+  (
+    <Provider store={store}>
+      <App/>
+    </Provider>
+  ),
   document.getElementById('root')
 );

@@ -53,3 +53,25 @@ Shop UI
 replace folders public and src from author's source code
 
 $ npm i classnames
+
+
+React-Redux bindings
+
+<Provider />
+    
+    Higher order component (HOC), wrapped around you React app
+    
+    Makes store accessible to all components (through context)
+
+
+connect(mapStateToProps, mapDispatchToProps)
+    
+    Returns a HOC 
+    
+    Returned values from mapStateToProps & mapDispatchToProps 
+    are added to the component's props 
+
+
+$ npm i react-redux
+
+
