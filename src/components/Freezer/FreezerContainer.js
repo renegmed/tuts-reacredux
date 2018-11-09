@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import store from '../../store';
 import { actions } from '../../ducks/freezer';
 import * as FLAVORS from '../../constants/flavors';
 
@@ -14,8 +13,8 @@ class FreezerContainer extends Component {
   componentDidMount() { 
     setInterval(() => {
       const randomTemperature = -Math.round(Math.random() * 10);
-      //console.log("random temperature:", randomTemperature);
-      store.dispatch(actions.updateTemperature(randomTemperature));
+      this.props.updateTemperature(randomTemperature);
+
     }, 2000);
   }
   
@@ -23,7 +22,7 @@ class FreezerContainer extends Component {
     const amount = parseInt(window.prompt(`Enter amount to restock ${flavorName}`));
 
     if (!isNaN(amount)) {  // amount is a number
-      store.dispatch(actions.addProductToFreezer(flavorName, amount));
+        this.props.addProductToFreezer(flavorName, amount);
     }
   };
 
@@ -37,8 +36,9 @@ class FreezerContainer extends Component {
   }
 
   handleClickFlavor = (flavorName) => {
-    store.dispatch(actions.removeScoop(flavorName));
+    this.props.removeScoop(flavorName); 
   }
+
   render() {
     return (
        <Freezer 
@@ -57,6 +57,12 @@ const mapStateToProps = (state) => ({
   temperature: state.freezer.temperature,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  updateTemperature: (temperature) => dispatch(actions.updateTemperature(temperature)),
+  addProductToFreezer: (flavorName, amount) => dispatch(actions.addProductToFreezer(flavorName, amount)),
+  removeScoop: (flavorName) => dispatch(actions.removeScoop(flavorName)),
+});
+
 // NOTE subscribe and unsubscribe is now handled by React-Redux Binding
-export default connect(mapStateToProps)(FreezerContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(FreezerContainer);
 
