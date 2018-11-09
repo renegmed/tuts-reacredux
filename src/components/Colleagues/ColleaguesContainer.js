@@ -10,10 +10,10 @@ class ColleaguesContainer extends Component {
     componentDidMount() {
         this.props.fetchEmployees();
     }
-    
+
     render() {
         return (
-            <Colleagues />
+            <Colleagues {...this.props.employees} />
         );
     }
 }

@@ -16,7 +16,7 @@ const Colleague = ({ photo, name, status }) => (
   </tr>
 );
 
-class Colleagues extends Component {
+class Colleagues extends Component { 
   render() {
     return (
       <Panel title="Colleagues">
@@ -26,11 +26,14 @@ class Colleagues extends Component {
             <col width="100%" />
           </colgroup>
           <tbody>
-            <Colleague
-              photo="https://randomuser.me/api/portraits/women/36.jpg"
-              name="Victoria"
-              status="Checked in"
+            {this.props.data.map( (person, index) => (
+              <Colleague
+              key={index}
+              photo={person.picture.thumbnail}
+              name={person.name.first}
+              status={person.status}
             />
+            ))}
           </tbody>
         </table>
       </Panel>
