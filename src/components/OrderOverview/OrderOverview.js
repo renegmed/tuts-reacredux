@@ -5,17 +5,16 @@ import OrderTicket from '../OrderTicket/OrderTicket';
 
 class OrderOverview extends Component {
   render() {
+    console.log(this.props);
+
     return (
       <Panel title="Orders" horizontalScroll>
+       {this.props.orders.map( (order, index) => (
         <OrderTicket
-          customerName="Cindy"
-          cone={true}
-          status="pending"
-          scoops={{
-            'Vanilla': 1,
-            'Chocolate': 3,
-          }}
+           key={index}
+           {...order}
         />
+       ))}
       </Panel>
     );
   }
