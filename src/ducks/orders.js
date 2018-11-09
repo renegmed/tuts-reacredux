@@ -5,15 +5,7 @@ export const types = {
   CANCEL_ORDER: 'CANCEL_ORDER',
 };
 
-export function reducer(state = [{ 
-    customerName: 'Rene G',
-    createdAt: 1541772611210,
-    cone: true,
-    scoops: {
-      CHOCOLATE: 1,
-      VANILLA: 2
-    } 
-}], action) {
+export function reducer(state = [], action) {
   switch (action.type) {
     case types.PLACE_ORDER:
       return [
