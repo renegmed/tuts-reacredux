@@ -26,7 +26,12 @@ class Colleagues extends Component {
         <p>Loading...</p>
       );
     } else {
-      panelContent = ( 
+      if (this.props.error) {
+        panelContent = ( 
+          <p>Something went wrong while fetching the data: <code>{this.props.error}</code></p>  
+        );
+      } else {
+        panelContent = (
           <table className="colleagues-table">
             <colgroup>
               <col width="0" />
@@ -43,9 +48,10 @@ class Colleagues extends Component {
               ))}
             </tbody>
           </table> 
-      );
+        );  
+      }
     }
-    
+
     return (
       <Panel title="Colleagues">
       {panelContent}
