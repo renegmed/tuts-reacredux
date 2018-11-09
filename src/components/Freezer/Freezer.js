@@ -21,11 +21,11 @@ class Freezer extends Component {
       });
     });
 
-    setInterval(() => {
-      const randomTemperature = -Math.round(Math.random() * 10);
-      //console.log("random temperature:", randomTemperature);
-      store.dispatch(actions.updateTemperature(randomTemperature));
-    }, 2000);
+    // setInterval(() => {
+    //   const randomTemperature = -Math.round(Math.random() * 10);
+    //   //console.log("random temperature:", randomTemperature);
+    //   store.dispatch(actions.updateTemperature(randomTemperature));
+    // }, 2000);
   }
 
   componentWillUnmount() {
@@ -48,13 +48,18 @@ class Freezer extends Component {
       this.handleClickRestock(flavorName);
     }
   }
+
+  handleClickFlavor = (flavorName) => {
+    store.dispatch(actions.removeScoop(flavorName));
+  }
   render() {
     const flavors = Object.keys(this.state.flavors).map(flavorName => (
       <FreezerFlavor 
-        key={flavorName}
-        onClickRestock={() => this.handleClickRestock(flavorName)} 
+        key={flavorName} 
         flavorName={flavorName} 
-        scoops={this.state.flavors[flavorName]} 
+        scoops={this.state.flavors[flavorName]}
+        onClickRestock={() => this.handleClickRestock(flavorName)} 
+        onClickFlavor={() => this.handleClickFlavor(flavorName)}  
       />
     ));
     
